@@ -305,8 +305,8 @@ namespace SRTPluginUIRE2DirectXOverlay
                             float imageY = invYOffset + (slotRow * INV_SLOT_HEIGHT);
                             //float textX = imageX + (INV_SLOT_WIDTH * options.ScalingFactor);
                             //float textY = imageY + (INV_SLOT_HEIGHT * options.ScalingFactor);
-                            float textX = (imageX + INV_SLOT_WIDTH) * 0.96f;
-                            float textY = (imageY + INV_SLOT_HEIGHT) * 0.92f;
+                            float textX = imageX + (INV_SLOT_WIDTH * 0.96f);
+                            float textY = imageY + (INV_SLOT_HEIGHT * 0.68f);
                             SolidBrush textBrush = _white;
                             if (gameMemory.PlayerInventory[i].Quantity == 0)
                                 textBrush = _darkred;
@@ -343,7 +343,7 @@ namespace SRTPluginUIRE2DirectXOverlay
                                 _device?.DrawBitmap(_invItemSheet1, drawRegion, 1f, SharpDX.Direct2D1.BitmapInterpolationMode.Linear, imageRegion);
 
                             // Draw the quantity text.
-                            _graphics?.DrawText(_consolasBold, 22f, textBrush, textX, textY, (gameMemory.PlayerInventory[i].Quantity != -1) ? gameMemory.PlayerInventory[i].Quantity.ToString() : "∞");
+                            _graphics?.DrawText(_consolasBold, 22f, textBrush, textX - GetStringSize(gameMemory.PlayerInventory[i].Quantity.ToString(), 22f), textY, (gameMemory.PlayerInventory[i].Quantity != -1) ? gameMemory.PlayerInventory[i].Quantity.ToString() : "∞");
                         }
                     }
                 }
