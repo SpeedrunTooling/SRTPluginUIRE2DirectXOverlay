@@ -357,6 +357,7 @@ namespace SRTPluginUIRE2DirectXOverlay
 
         private void DrawProgressBar(ref float xOffset, ref float yOffset, float chealth, float mhealth, float percentage = 1f)
         {
+            if (config.ShowDamagedEnemiesOnly && percentage == 1f) { return; }
             string perc = float.IsNaN(percentage) ? "0%" : string.Format("{0:P1}", percentage);
             float endOfBar = config.PositionX + 342f - GetStringSize(perc);
             _graphics.DrawRectangle(_greydark, xOffset, yOffset += 28f, xOffset + 342f, yOffset + 22f, 4f);

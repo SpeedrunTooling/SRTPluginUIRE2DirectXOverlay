@@ -5,6 +5,7 @@
         public bool Debug { get; set; }
         public bool NoInventory { get; set; }
         public bool ShowHPBars { get; set; }
+        public bool ShowDamagedEnemiesOnly { get; set; }
         public bool ShowDifficultyAdjustment { get; set; }
         public float ScalingFactor { get; set; }
 
@@ -27,6 +28,7 @@
             Debug = false;
             NoInventory = true;
             ShowHPBars = true;
+            ShowDamagedEnemiesOnly = false;
             ShowDifficultyAdjustment = true;
             ScalingFactor = 1f;
             PositionX = 5f;
