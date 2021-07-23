@@ -11,8 +11,8 @@
     <Copyright>Copyright © 2021 Travis J. Gutjahr</Copyright>
     <Product>Resident Evil 2 (2019) DirectX Overlay User Interface Plugin</Product>
     <Description>A user-interface plugin to display the values provided by the RE2 Provider Plugin in a DirectX overlay.</Description>
-    <Version>1.0.2.3</Version>
-    <FileVersion>1.0.2.3</FileVersion>
+    <Version>1.0.2.4</Version>
+    <FileVersion>1.0.2.4</FileVersion>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <DebugType>embedded</DebugType>
     <!-- netcoreapp3.1 had to be hardcoded here because this project reports $(TargetFramework) as netstandard2.0 (rightfully so) and I am not sure how this project's csproj can auto-detect another project's framework version to copy it to the appropriate folder so we're just... hardcoding this. -->

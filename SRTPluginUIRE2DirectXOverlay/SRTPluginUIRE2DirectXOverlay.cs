@@ -42,6 +42,9 @@ namespace SRTPluginUIRE2DirectXOverlay
         private SolidBrush _darkgreen;
         private SolidBrush _darkyellow;
 
+        private SolidBrush _lightpurple;
+        private SolidBrush _darkpurple;
+
         private IReadOnlyDictionary<ItemEnumeration, SharpDX.Mathematics.Interop.RawRectangleF> itemToImageTranslation;
         private IReadOnlyDictionary<Weapon, SharpDX.Mathematics.Interop.RawRectangleF> weaponToImageTranslation;
         private SharpDX.Direct2D1.Bitmap _invItemSheet1;
@@ -106,11 +109,15 @@ namespace SRTPluginUIRE2DirectXOverlay
             _darkgreen = _graphics?.CreateSolidBrush(0, 102, 0, 100);
             _darkyellow = _graphics?.CreateSolidBrush(218, 165, 32, 100);
             _red = _graphics?.CreateSolidBrush(255, 0, 0);
-            _lightred = _graphics?.CreateSolidBrush(255, 183, 183);
-            _lightyellow = _graphics?.CreateSolidBrush(255, 255, 0);
-            _lightgreen = _graphics?.CreateSolidBrush(0, 255, 0);
+            _lightred = _graphics?.CreateSolidBrush(255, 172, 172);
+            _lightyellow = _graphics?.CreateSolidBrush(255, 255, 150);
+            _lightgreen = _graphics?.CreateSolidBrush(150, 255, 150);
             _lawngreen = _graphics?.CreateSolidBrush(124, 252, 0);
             _goldenrod = _graphics?.CreateSolidBrush(218, 165, 32);
+
+            _lightpurple = _graphics?.CreateSolidBrush(222, 182, 255);
+            _darkpurple = _graphics?.CreateSolidBrush(73, 58, 85, 100);
+
             HPBarColor = _grey;
             TextColor = _white;
 
@@ -151,6 +158,9 @@ namespace SRTPluginUIRE2DirectXOverlay
             _lightgreen?.Dispose();
             _lawngreen?.Dispose();
             _goldenrod?.Dispose();
+
+            _lightpurple?.Dispose();
+            _darkpurple?.Dispose();
 
             _consolasBold?.Dispose();
 
@@ -198,7 +208,13 @@ namespace SRTPluginUIRE2DirectXOverlay
 
         private void SetColors()
         {
-            if (gameMemory.Player.HealthState == PlayerState.Fine) // Fine
+            if (gameMemory.IsPoisoned) // Poisoned
+            {
+                HPBarColor = _darkpurple;
+                TextColor = _lightpurple;
+                return;
+            }
+            else if (gameMemory.Player.HealthState == PlayerState.Fine) // Fine
             {
                 HPBarColor = _darkgreen;
                 TextColor = _lightgreen;
@@ -237,7 +253,7 @@ namespace SRTPluginUIRE2DirectXOverlay
             textOffsetX = statsXOffset + 10f + GetStringSize("IGT: ") + 10f;
             _graphics?.DrawText(_consolasBold, 20f, _lawngreen, textOffsetX, statsYOffset, gameMemory.IGTFormattedString); //110f
 
-            PlayerName = gameMemory.PlayerCharacter == CharacterEnumeration.Leon ? "Leon: " : "Claire: ";
+            PlayerName = string.Format("{0}: ", gameMemory.PlayerCharacter.ToString());
             SetColors();
 
             if (config.ShowHPBars)
@@ -363,8 +379,8 @@ namespace SRTPluginUIRE2DirectXOverlay
             _graphics.DrawRectangle(_greydark, xOffset, yOffset += 28f, xOffset + 342f, yOffset + 22f, 4f);
             _graphics.FillRectangle(_greydarker, xOffset + 1f, yOffset + 1f, xOffset + 340f, yOffset + 20f);
             _graphics.FillRectangle(_darkred, xOffset + 1f, yOffset + 1f, xOffset + (340f * percentage), yOffset + 20f);
-            _graphics.DrawText(_consolasBold, 20f, _white, xOffset + 10f, yOffset - 2f, string.Format("{0} / {1}", chealth, mhealth));
-            _graphics.DrawText(_consolasBold, 20f, _white, endOfBar, yOffset - 2f, perc);
+            _graphics.DrawText(_consolasBold, 20f, _lightred, xOffset + 10f, yOffset - 2f, string.Format("{0} / {1}", chealth, mhealth));
+            _graphics.DrawText(_consolasBold, 20f, _lightred, endOfBar, yOffset - 2f, perc);
         }
 
         private void DrawHealthBar(ref float xOffset, ref float yOffset, float chealth, float mhealth, float percentage = 1f)
