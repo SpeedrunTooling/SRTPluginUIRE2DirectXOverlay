@@ -16,8 +16,7 @@ namespace SRTPluginUIRE2DirectXOverlay
     {
         internal static PluginInfo _Info = new PluginInfo();
         public override IPluginInfo Info => _Info;
-        public string RequiredProvider => "SRTPluginProviderRE2";
-        private IPluginHostDelegates hostDelegates;
+        public string RequiredProducer => "SRTPluginProviderRE2";
         private IGameMemoryRE2 gameMemory;
 
         // DirectX Overlay-specific.
@@ -63,9 +62,8 @@ namespace SRTPluginUIRE2DirectXOverlay
         private string PlayerName = "";
 
         [STAThread]
-        public override int Startup(IPluginHostDelegates hostDelegates)
+        public override int Startup()
         {
-            this.hostDelegates = hostDelegates;
             config = LoadConfiguration<PluginConfiguration>();
 
             gameProcess = GetProcess();
@@ -194,9 +192,9 @@ namespace SRTPluginUIRE2DirectXOverlay
 
                 DrawOverlay();
             }
-            catch (Exception ex)
+            catch// (Exception ex)
             {
-                hostDelegates.ExceptionMessage.Invoke(ex);
+                //hostDelegates.ExceptionMessage.Invoke(ex);
             }
             finally
             {
@@ -678,5 +676,7 @@ namespace SRTPluginUIRE2DirectXOverlay
                 { new Weapon() { WeaponID = WeaponEnumeration.Minigun4, Attachments = AttachmentsFlag.None }, new SharpDX.Mathematics.Interop.RawRectangleF(INV_SLOT_WIDTH * (weaponColumnInc = 4), INV_SLOT_HEIGHT * ++weaponRowInc, INV_SLOT_WIDTH, INV_SLOT_HEIGHT) },
             };
         }
+
+        public bool Equals(IPluginUI? other) => (this as IPluginUI).Equals(other);
     }
 }

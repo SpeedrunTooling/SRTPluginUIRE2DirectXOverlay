@@ -22,5 +22,7 @@ namespace SRTPluginUIRE2DirectXOverlay
         public int VersionRevision => assemblyFileVersion.ProductPrivatePart;
 
         private System.Diagnostics.FileVersionInfo assemblyFileVersion = System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+        public bool Equals(IPluginInfo? other) => (this as IPluginInfo).Equals(other);
     }
 }

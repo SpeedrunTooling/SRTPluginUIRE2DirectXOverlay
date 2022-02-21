@@ -2,21 +2,22 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Platforms>x64</Platforms>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <Authors>Travis J. Gutjahr</Authors>
     <Company>Travis J. Gutjahr</Company>
-    <Copyright>Copyright © 2021 Travis J. Gutjahr</Copyright>
+    <Copyright>Copyright © 2022 Travis J. Gutjahr</Copyright>
     <Product>Resident Evil 2 (2019) DirectX Overlay User Interface Plugin</Product>
     <Description>A user-interface plugin to display the values provided by the RE2 Provider Plugin in a DirectX overlay.</Description>
-    <Version>1.0.2.4</Version>
-    <FileVersion>1.0.2.4</FileVersion>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <Version>1.1.0.0</Version>
+    <FileVersion>1.1.0.0</FileVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <DebugType>embedded</DebugType>
+	<Nullable>enable</Nullable>
     <!-- netcoreapp3.1 had to be hardcoded here because this project reports $(TargetFramework) as netstandard2.0 (rightfully so) and I am not sure how this project's csproj can auto-detect another project's framework version to copy it to the appropriate folder so we're just... hardcoding this. -->
-    <CopyDestionationPath>$(SolutionDir)..\..\Squirrelies\SRTHost\SRTHost\bin\$(Configuration)\net5.0-windows\plugins</CopyDestionationPath>
+    <CopyDestionationPath>$(SolutionDir)..\..\Squirrelies\SRTHost\SRTHost\bin\$(Configuration)\net6.0-windows\plugins</CopyDestionationPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
@@ -29,7 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GameOverlay.Net" Version="4.3.0" />
+    <PackageReference Include="GameOverlay.Net" Version="4.3.1" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
   </ItemGroup>
 
@@ -69,10 +70,6 @@
     </ItemGroup>
     <Message Text="Copying files: @(OutputFiles)" Importance="high" />
     <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(CopyDestionationPath)\$(ProjectName)\%(RecursiveDir)" OverwriteReadOnlyFiles="true"></Copy>
-  </Target>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(BuildingInsideVisualStudio)' == 'true' And '$(TJGutjahr)' == 'true'">
-    <Exec Command="&quot;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool.exe&quot; sign /tr &quot;http://timestamp.digicert.com&quot; /td SHA1 /sha1 &quot;33982512a318ef75eeb82a9db6d637c041a18974&quot; /fd SHA1 &quot;$(TargetDir)\$(ProjectName).dll&quot;&#xD;&#xA;&quot;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool.exe&quot; sign /tr &quot;http://timestamp.digicert.com&quot; /td SHA256 /sha1 &quot;33982512a318ef75eeb82a9db6d637c041a18974&quot; /fd SHA256 /as &quot;$(TargetDir)\$(ProjectName).dll&quot;&#xD;&#xA;&quot;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool.exe&quot; sign /tr &quot;http://timestamp.digicert.com&quot; /td SHA512 /sha1 &quot;33982512a318ef75eeb82a9db6d637c041a18974&quot; /fd SHA512 /as &quot;$(TargetDir)\$(ProjectName).dll&quot;&#xD;&#xA;" />
   </Target>
   
 </Project>
