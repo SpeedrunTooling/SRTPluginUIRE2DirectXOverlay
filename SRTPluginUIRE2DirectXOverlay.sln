@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTPluginUIRE2DirectXOverlay", "SRTPluginUIRE2DirectXOverlay\SRTPluginUIRE2DirectXOverlay.csproj", "{EE688214-F225-4A46-9ABF-463F9A1DD458}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTPluginProviderRE2", "..\SRTPluginProviderRE2\SRTPluginProviderRE2\SRTPluginProviderRE2.csproj", "{2393C984-6FEE-466A-8DD8-875D9D6CF51C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTPluginBase", "..\..\Squirrelies\SRTHost\SRTPluginBase\SRTPluginBase.csproj", "{2A4F6B29-5845-484B-AF44-2AD960835F64}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessMemory", "..\..\Squirrelies\ProcessMemory\ProcessMemory\ProcessMemory.csproj", "{1A89B414-909C-4C51-931A-2739BBD25471}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRTPluginBase", "..\..\SpeedRunTool\SRTHost\SRTPluginBase\SRTPluginBase.csproj", "{2A4F6B29-5845-484B-AF44-2AD960835F64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{2A4F6B29-5845-484B-AF44-2AD960835F64}.Debug|x64.Build.0 = Debug|Any CPU
 		{2A4F6B29-5845-484B-AF44-2AD960835F64}.Release|x64.ActiveCfg = Release|Any CPU
 		{2A4F6B29-5845-484B-AF44-2AD960835F64}.Release|x64.Build.0 = Release|Any CPU
-		{1A89B414-909C-4C51-931A-2739BBD25471}.Debug|x64.ActiveCfg = Debug|x64
-		{1A89B414-909C-4C51-931A-2739BBD25471}.Debug|x64.Build.0 = Debug|x64
-		{1A89B414-909C-4C51-931A-2739BBD25471}.Release|x64.ActiveCfg = Release|x64
-		{1A89B414-909C-4C51-931A-2739BBD25471}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
