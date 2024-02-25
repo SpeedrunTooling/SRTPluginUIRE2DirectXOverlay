@@ -71,7 +71,7 @@ namespace SRTPluginUIRE2DirectXOverlay
             gameProcess = GetProcess();
             if (gameProcess == default)
                 return 1;
-            gameWindowHandle = gameProcess.MainWindowHandle;
+            gameWindowHandle = PInvoke.GetWindowHandles(gameProcess, "via")[0];
 
             DEVMODE devMode = default;
             devMode.dmSize = (short)Marshal.SizeOf<DEVMODE>();

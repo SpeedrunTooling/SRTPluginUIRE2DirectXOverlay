@@ -1,4 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SRTPluginUIRE2DirectXOverlay
 {
@@ -6,6 +10,38 @@ namespace SRTPluginUIRE2DirectXOverlay
     {
         [DllImport("user32.dll")]
         public static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
+        public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
+
+        public static IList<IntPtr> GetWindowHandles(Process proc, string className)
+        {
+            IList<IntPtr> windowHandles = new List<IntPtr>();
+
+            StringBuilder classNameStringBuilder = new StringBuilder(256);
+            EnumWindows(delegate (IntPtr hWnd, IntPtr lParam)
+            {
+                classNameStringBuilder.Clear();
+                if (
+                GetWindowThreadProcessId(hWnd, out int processId) != 0 // Returns thread id that created the window or 0 if function failed.
+                && proc.Id == processId // Verify its for the process we care about.
+                && GetClassName(hWnd, classNameStringBuilder, classNameStringBuilder.Capacity) != 0 // Returns number of characters copied to buffer or 0 if function failed.
+                && string.Equals(classNameStringBuilder.ToString(), className, StringComparison.Ordinal) // Verify it matches the class name we supplied.
+                )
+                    windowHandles.Add(hWnd);
+
+                return true; // Return true that we handled it and to proceed to the next item.
+            }, IntPtr.Zero);
+
+            return windowHandles;
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]
