@@ -63,7 +63,7 @@ jobs:
       run: |
         echo '::set-output name=solution::${{env.project-name}}.sln'
         echo '::set-output name=project::${{env.project-name}}/${{env.project-name}}.csproj'
-        echo '::set-output name=build-directory::${{env.project-name}}/bin/${{env.platform}}/Release/net5.0-windows/'
+        echo '::set-output name=build-directory::${{env.project-name}}/bin/${{env.platform}}/Release/net5.0/'
 
     # Get the project's version number
     - name: Get project version
