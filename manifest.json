@@ -1,0 +1,16 @@
+{
+  "Contributors": [
+    "Squirrelies",
+    "VideoGameRoulette"
+  ],
+  "Releases": [
+    {
+      "Version": "2.0.2.0",
+      "DownloadURL": "https://github.com/SpeedrunTooling/SRTPluginUIRE2DirectXOverlay/releases/download/2.0.2.0/SRTPluginUIRE2DirectXOverlay-v2.0.2.0.zip"
+    },
+    {
+      "Version": "2.0.0.3",
+      "DownloadURL": "https://github.com/SpeedrunTooling/SRTPluginUIRE2DirectXOverlay/releases/download/2.0.0.3/SRTPluginUIRE2DirectXOverlay-v2.0.0.3.zip"
+    }
+  ]
+}
